@@ -4,24 +4,49 @@ O objetivo desse desafio foi modelar e implementar uma estrutura de base de dado
 
 O projeto foi desenvolvido aplicando duas abordagens diferentes: a primeira proposta, usando tabela de domínio e a segunda, usando enum.
 
-# Proposta 1
+## Proposta 1 
+1) <ins>Modelagem de dados</ins>
+    
+    A proposta 1 envolve a modelagem de dados utilizando três entidades ou tabelas: uma tabela contendo o identificador do profissional de saúde e seus atributos; uma segunda tabela contendo o identificador do plano de saúde e seus atributos; e uma terceira fazendo a relação entre um profissional de saúde e um plano de saúde, criando um identificador do contrato entre eles e contendo outras informações necessárias nesse contexto.
 
-1) Modelagem de dados
-A proposta 1 envolve a modelagem de dados utilizando três entidades ou tabelas: uma tabela contendo o identificador do profissional de saúde e seus atributos; uma segunda tabela contendo o identificador do plano de saúde e seus atributos; e uma terceira fazendo a relação entre um profissional de saúde e um plano de saúde, criando um identificador do contrato entre eles e contendo outras informações necessárias nesse contexto.
+2) <ins>DER</ins>
+    
+    ![Diagrama entidade-relacionamento desenvolvido para a proposta 1](modelagem/DER_dominio.png)
+   
+3) <ins>Dicionário de dados</ins>
+   
+    No arquivo pdf localizado no repositório *modelagem* podem ser encontradas mais informações sobre os atributos de cada tabela do DER referente a essa proposta.
+   
+4) <ins>Vantagens e desvantagens</ins>
 
-2) DER
-O diagrama de entidade-relacionamento para a proposta 1 poder ser encontrado no repositório *modelagem* (arquivo PNG intitulado DER_dominio).
+    A principal vantagem dessa abordagem é a facilidade de manutenção da base de dados, cadastrando novos planos na tabela referente aos planos de saúde. Além disso, a garantia de relacionamentos consistentes entre as três tabelas devido ao uso de chaves estrangeiras (*foreign key* ou *FK*) é essencial para que não sejam adicionados profissionais ou planos de saúde duplicados, por exemplo. Ademais, a facilidade em realizar as buscas na base de dados, como quais planos um profissional de saúde aceita ou quais profissionais aceitam um plano de saúde específico.
+  
+    Em relação às desvantagens, é preciso destacar a necessidade de três tabelas diferentes nessa proposta, o que pode representar um peso significativo para a base de dados, aumentando os custos de armazenamento da mesma. Essa estrutura também faz com que a manutenção seja um pouco mais complexa do que apenas salvar os planos de saúde direto em um campo de uma só tabela.
 
-4) Dicionário de dados
-No arquivo pdf localizado no repositório *modelagem* podem ser encontradas mais informações sobre os atributos de cada tabela do DER referente a essa proposta.
+5) <ins>Scripts</ins>
 
-6) Vantagens e desvantagens
+    Os scripts para criação das tabelas e constraints podem ser encontrados no repositório *scripts*.
 
-7) Scripts
+## Proposta 2
 
-# Proposta 2
+1) <ins>Modelagem de dados</ins>
+    
+    A proposta 2 envolve a modelagem de dados utilizando uma tabela referente aos profissionais de saúde, contendo o identificador do profissional e seus atributos, dos quais um deles é um campo designado aos planos de saúde que esse profissional aceita. Esse campo é do tipo enum e contém dados em texto (*string*) com os planos aceitos pelo profissional; no entanto, esses dados são decodificados como números.
 
-1) Modelagem de dados
-A proposta 2 segue uma abordagem diversa, em que criamos somente uma entidade ou tabela para profissional de saúde.
+2) <ins>DER</ins>
+    
+    ![Diagrama entidade-relacionamento desenvolvido para a proposta 2](modelagem/DER_enum.png)
+   
+3) <ins>Dicionário de dados</ins>
+   
+    No arquivo pdf localizado no repositório *modelagem* podem ser encontradas mais informações sobre os atributos de cada tabela do DER referente a essa proposta.
+   
+4) <ins>Vantagens e desvantagens</ins>
 
-3) 
+    A principal vantagem da proposta 2 é a simplicidade da estrutura da base de dados contendo apenas uma tabela, além de a estrutura ENUM necessitar de 1/6 do espaço de armazenamento de um dado de tipo *string*. A inserção de novos profissionais de saúde na base também é facilitada, pois não é necessário atualizar a tabela de profissionais de saúde e a tabela de domínio. Essa abordagem oferece uma boa performance para listas pequenas e relativamente estáveis de planos.
+
+   Quanto às desvantagens:
+   
+5) <ins>Scripts</ins>
+
+    Os scripts para criação das tabelas e constraints podem ser encontrados no repositório *scripts*.
