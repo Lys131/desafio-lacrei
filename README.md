@@ -45,7 +45,7 @@ O projeto foi desenvolvido aplicando duas abordagens diferentes: a primeira prop
 
     A principal vantagem da proposta 2 é a simplicidade da estrutura da base de dados contendo apenas uma tabela, além de a estrutura ENUM necessitar de 1/6 do espaço de armazenamento de um dado de tipo *string*. A inserção de novos profissionais de saúde na base também é facilitada, pois não é necessário atualizar a tabela de profissionais de saúde e a tabela de domínio. Essa abordagem oferece uma boa performance para listas pequenas e relativamente estáveis de planos.
 
-   Quanto às desvantagens:
+   Quanto às desvantagens: 
    
 5) <ins>Scripts</ins>
 
