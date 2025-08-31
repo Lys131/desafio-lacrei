@@ -53,6 +53,6 @@ O projeto foi desenvolvido aplicando duas abordagens diferentes: a primeira prop
 
 ## Reflexão sobre uso de `jsonb`
 
-**jsonb** é um tipo de dado desenvolvido para armazenar dados do tipo JSON em um formato binário otimizado e decomposto. Dados do tipo JSON se assemelham a um dicionário da linguagem de código Python, permitindo o armazenamento de dados complexos, mas ainda assim estruturados e unidos. Dessa forma, o uso desse tipo de estrutura no contexto do desafio seria adequado na **proposta 1**. 
+`jsonb` é um tipo de dado desenvolvido para armazenar dados do tipo JSON em um formato binário otimizado e decomposto. Dados do tipo JSON se assemelham a um dicionário da linguagem de código Python, permitindo o armazenamento de dados complexos, mas ainda assim estruturados e unidos. Dessa forma, o uso desse tipo de estrutura no contexto do desafio seria adequado na **proposta 1**. 
     
 Na tabela de domínio, na qual se faz a relação entre os profissionais de saúde e os planos, existe o campo *condicoes_atendimento*, onde poderiam ficar armazenadas múltiplas informações, como limite de consultas, horário de atendimeno e observações. No repositório *scripts*, podem ser encontrados o script para a criação do atributo `jsonb` e a inserção de dados.
