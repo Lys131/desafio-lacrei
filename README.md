@@ -25,7 +25,7 @@ O projeto foi desenvolvido aplicando duas abordagens diferentes: a primeira prop
 
 5) <ins>Scripts</ins>
 
-    Os scripts para criação das tabelas e constraints podem ser encontrados no repositório *scripts*.
+    Os scripts para criação das tabelas e índices podem ser encontrados no repositório *scripts*.
 
 ## Proposta 2
 
@@ -43,10 +43,16 @@ O projeto foi desenvolvido aplicando duas abordagens diferentes: a primeira prop
    
 4) <ins>Vantagens e desvantagens</ins>
 
-    A principal vantagem da proposta 2 é a simplicidade da estrutura da base de dados contendo apenas uma tabela, além de a estrutura ENUM necessitar de 1/6 do espaço de armazenamento de um dado de tipo *string*. A inserção de novos profissionais de saúde na base também é facilitada, pois não é necessário atualizar a tabela de profissionais de saúde e a tabela de domínio. Essa abordagem oferece uma boa performance para listas pequenas e relativamente estáveis de planos.
+    A principal vantagem da proposta 2 é a simplicidade da estrutura da base de dados contendo apenas uma tabela, além de a estrutura ENUM necessitar de 1/6 do espaço de armazenamento de um dado de tipo *string*. A inserção de novos profissionais de saúde na base também é facilitada, pois não é necessário atualizar a tabela de profissionais de saúde e a tabela de domínio.
 
-   Quanto às desvantagens: 
+   Quanto às desvantagens deve-se destacar a limitação de escalabilidade e a maior complexidade para utilizar filtros como profissionais para um plano de saúde específico quando utilizada a estrutura ENUM. Dificuldades também podem surgir ao utilizar números, quando é necessário ordenar os valores contidos no ENUM e quando é necessário inserir um novo plano de saúde na tabela.
    
 5) <ins>Scripts</ins>
 
-    Os scripts para criação das tabelas e constraints podem ser encontrados no repositório *scripts*.
+    Os scripts para criação das tabelas e índices podem ser encontrados no repositório *scripts*.
+
+## Reflexão sobre uso de `jsonb`
+
+`jsonb` é um tipo de dado desenvolvido para armazenar dados do tipo JSON em um formato binário otimizado e decomposto. Dados do tipo JSON se assemelham a um dicionário da linguagem de código Python, permitindo o armazenamento de dados complexos, mas ainda assim estruturados e unidos. Dessa forma, o uso desse tipo de estrutura no contexto do desafio seria adequado na **proposta 1**. 
+    
+Na tabela de domínio, na qual se faz a relação entre os profissionais de saúde e os planos, existe o campo *condicoes_atendimento*, onde poderiam ficar armazenadas múltiplas informações, como limite de consultas, horário de atendimeno e observações. No repositório *scripts*, podem ser encontrados o script para a criação do atributo `jsonb` e a inserção de dados.
