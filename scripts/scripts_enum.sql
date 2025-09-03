@@ -35,6 +35,15 @@ CREATE TABLE Profissional (
 );
 
 -- Criação de índices:
-CREATE INDEX idx_profissional_cidade ON Profissional(cidade);
+-- Índices para profissional de saúde:
+CREATE INDEX idx_profissional_nome ON Profissional(nome);
 CREATE INDEX idx_profissional_especialidade ON Profissional(especialidade);
-CREATE INDEX idx_profissional_planos ON Profissional USING GIN(planos_aceitos);
+CREATE INDEX idx_profissional_telefone ON Profissional(telefone);
+CREATE INDEX idx_profissional_email ON Profissional(email);
+CREATE INDEX idx_profissional_cidade ON Profissional(cidade);
+CREATE INDEX idx_profissional_cpf ON Profissional(cpf);
+CREATE INDEX idx_profissional_cnpj ON Profissional(cnpj);
+
+-- Índice GIN para ENUM
+CREATE INDEX idx_profissional_planos
+    ON Profissional USING GIN (planos_aceitos);

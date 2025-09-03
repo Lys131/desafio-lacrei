@@ -16,9 +16,6 @@ CREATE TABLE Profissional (
     CNPJ VARCHAR(18) UNIQUE CHECK (CNPJ ~ '^[0-9]{14,18}$')
 );
 
--- Criação de índice:
-CREATE INDEX idx_profissional_especialidade ON Profissional(especialidade);
-
 -- Criação da tabela PlanodeSaude:
 CREATE TABLE PlanodeSaude (
     id_plano INTEGER(10) PRIMARY KEY,
@@ -28,9 +25,6 @@ CREATE TABLE PlanodeSaude (
     registro_ANS VARCHAR(6) UNIQUE,
     CNPJ VARCHAR(18) UNIQUE CHECK (CNPJ ~ '^[0-9]{14,18}$')
 );
-
--- Criação de índice:
-CREATE INDEX idx_planosaude_nome ON PlanodeSaude(nome);
 
 -- Criação tabela de domínio Profissional_Plano:
 CREATE TABLE Profissional_Plano (
@@ -45,6 +39,20 @@ CREATE TABLE Profissional_Plano (
 );
 
 -- Criação de índices:
-CREATE INDEX idx_profissionalplano_profissional ON Profissional_Plano(id_profissional);
-CREATE INDEX idx_profissionalplano_plano ON Profissional_Plano(id_plano);
+-- Índices para Profissional:
+CREATE INDEX idx_profissional_nome ON Profissional(nome);
+CREATE INDEX idx_profissional_cidade ON Profissional(cidade);
+CREATE INDEX idx_profissional_cpf ON Profissional(cpf);
+CREATE INDEX idx_profissional_cnpj ON Profissional(cnpj);
+CREATE INDEX idx_profissional_espec ON Profissional(especialidade);
+
+-- Índices para PlanodeSaude:
+CREATE INDEX idx_plano_nome ON PlanodeSaude(nome);
+CREATE INDEX idx_plano_registroans ON PlanodeSaude(registro_ans);
+CREATE INDEX idx_plano_cnpj ON PlanodeSaude(cnpj);
+
+-- Índices Profissional_Plano:
 CREATE INDEX idx_profissionalplano_status ON Profissional_Plano(status_contrato);
+CREATE INDEX idx_profissionalplano_data_inicio ON Profissional_Plano(data_inicio_contrato);
+CREATE INDEX idx_profissionalplano_data_fim ON Profissional_Plano(data_fim_contrato);
+CREATE INDEX idx_profissionalplano_prof_plano ON Profissional_Plano(id_profissional, id_plano);
