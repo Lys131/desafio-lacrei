@@ -56,3 +56,32 @@ O projeto foi desenvolvido aplicando duas abordagens diferentes: a primeira prop
 `jsonb` é um tipo de dado desenvolvido para armazenar dados do tipo JSON em um formato binário otimizado e decomposto. Dados do tipo JSON se assemelham a um dicionário da linguagem de código Python, permitindo o armazenamento de dados complexos, mas ainda assim estruturados e unidos. Dessa forma, o uso desse tipo de estrutura no contexto do desafio seria adequado na **proposta 1**. 
     
 Na tabela de domínio, na qual se faz a relação entre os profissionais de saúde e os planos, existe o campo *condicoes_atendimento*, onde poderiam ficar armazenadas múltiplas informações, como limite de consultas, horário de atendimeno e observações. No repositório *scripts*, podem ser encontrados o script para a criação do atributo `jsonb` e a inserção de dados.
+
+## Comparação entre as duas propostas
+
+A **proposta 1** adota uma estrutura mais normalizada, distribuindo os dados em três tabelas (profissionais, planos e relacionamento entre eles), enquanto a estrutura da **proposta 2** concentra todos os dados em uma única tabela e os nomes dos planos de saúde em um campo ENUM, o que torna a estrutura mais desnormalizada do que a abordagem com tabela de domínio.
+
+Quanto à flexibilidade e escalabilidade, aplicando-se a **proposta 1**, é possível adicionar novos planos apenas inserindo registros na tabela correspondente, sem impactar o esquema do banco. Na **proposta 2**, cada novo plano exige alteração no ENUM, ou seja, é necessário modificar o esquema do banco para adicionar novos planos. Essa modificação exige *migrations* e pode afetar consultas existentes.
+
+Em relação à consistência e integridade dos dados, a **proposta 1** garante maior confiabilidade do que a **proposta 2**, já que utiliza chaves estrangeiras, evitando duplicações e assegurando relacionamentos corretos. A segunda abordagem, por depender do ENUM, não oferece o mesmo nível de controle e pode gerar dificuldades no gerenciamento dos valores.
+
+Finalmente, a **proposta 1** facilita buscas complexas, como identificação de todos os planos aceitos por um profissional ou todos os profissionais vinculados a determinado plano, mesmo que dependa de JOIN. Já na **proposta 2**, as consultas são mais diretas por todos os dados estarem em uma única tabela. Contudo as buscas são menos eficientes e flexíveis, principalmente quando se deseja filtrar por planos específicos.
+
+Dessa forma, a conclusão desse desafio é que a **proposta 1** é a mais adequada, já que o objetivo do Lacrei Saúde é ter uma base de dados com uma quantidade considerável de profissionais de saúde e gerir de forma eficiente a quais planos de saúde esses profissionais estão ligados atualmente. Ainda assim, se a ideia for apenas testar de forma rápida, como em um protótipo ou MVP, a **proposta 2** pode ser válida.
+
+## Governança de dados e LGPD
+
+Seguem os pontos a serem considaderados para:
+
+1) Governança de Dados  
+- Definição de pessoas responsáveis na utilização e gestão dos dados  
+- Políticas claras aos usuários de acesso, correção e exclusão de dados  
+- Auditoria, monitoramento e documentação para garantir transparência  
+- Uso ético e responsável das informações  
+
+2) LGPD  
+- Coleta apenas dos dados estritamente necessários
+- Consentimento informado dos usuários para uso de dados
+- Proteção de informações sensíveis (anonimização e segurança)
+- Políticas de retenção para evitar armazenamento desnecessário
+- Garantia dos direitos dos usuários: acesso, correção e exclusão
